@@ -1,5 +1,8 @@
 # History
 
+## v3.0.2 2020 September 15
+-   优化了windows里获取mac
+
 ## v3.0.1 2019 November 18
 
 -   Better handling of errors with the `getmac-node` binary

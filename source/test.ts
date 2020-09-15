@@ -1,7 +1,7 @@
 // Import
 import kava from 'kava'
 import { equal } from 'assert-helpers'
-import getMAC, { extractMAC, isMAC } from './'
+import { getMAC, extractMAC, isMAC } from './'
 import { readFileSync } from 'fs'
 
 const fixtures = {

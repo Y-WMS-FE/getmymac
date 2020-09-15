@@ -6,6 +6,8 @@ const isWindows = process.platform.startsWith('win')
 const macRegex = /(?:[a-z0-9]{2}[:-]){5}[a-z0-9]{2}/gi
 const zeroRegex = /(?:[0]{2}[:-]){5}[0]{2}/
 
+const winMacLineRegex = /\\Device\\Tcpip_/gi
+
 // Helpers
 function asyncExec(command: string): Promise<string> {
 	return new Promise(function(resolve, reject) {
@@ -53,6 +55,14 @@ function extractInterface(iface: string, input: string) {
 	return result
 }
 
+/* Extract the Mac address info line where platform is win */
+function extractMacLine(input: string) {
+	winMacLineRegex.lastIndex = 0
+	const lines = input.split(/\r?\n/g).filter(v => v)
+	const macLine = lines.find(v => winMacLineRegex.test(v))
+	return macLine || input
+}
+
 /** Extract the MAC address from a string */
 export function extractMAC(input: string, iface?: string): string {
 	// Prepare
@@ -62,6 +72,10 @@ export function extractMAC(input: string, iface?: string): string {
 
 	// Find a valid mac address
 	macRegex.lastIndex = 0 // reset
+	// Find window mac address line
+	if (isWindows) {
+		input = extractMacLine(input)
+	}
 	let match: RegExpExecArray | null
 	/* eslint no-cond-assign:0 */
 	while ((match = macRegex.exec(input))) {
@@ -77,7 +91,7 @@ export function extractMAC(input: string, iface?: string): string {
 }
 
 /** Get the first proper MAC address */
-export default async function getMAC(iface?: string): Promise<string> {
+export async function getMAC(iface?: string): Promise<string> {
 	const command = isWindows
 		? '%SystemRoot%/System32/getmac.exe'
 		: '/sbin/ifconfig -a || /sbin/ip link'
