@@ -55,6 +55,8 @@ template.js
 component.json
 bower.json
 
+/fixtures
+
 # =====================================
 # CUSTOM MODIFICATIONS
 

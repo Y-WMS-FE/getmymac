@@ -2,7 +2,7 @@
   "name": "getmac",
   "version": "3.0.1",
   "description": "Get the mac address of the current machine you are on",
-  "homepage": "https://github.com/bevry/getmac",
+  "homepage": "https://github.com/SHEIN-WMS-FE/getmymac",
   "license": "MIT",
   "keywords": [
     "mac",
@@ -11,40 +11,7 @@
     "ipconfig",
     "getmac"
   ],
-  "badges": {
-    "list": [
-      "travisci",
-      "npmversion",
-      "npmdownloads",
-      "daviddm",
-      "daviddmdev",
-      "---",
-      "patreon",
-      "flattr",
-      "liberapay",
-      "buymeacoffee",
-      "opencollective",
-      "crypto",
-      "paypal",
-      "wishlist"
-    ],
-    "config": {
-      "buymeacoffeeUsername": "balupton",
-      "cryptoURL": "https://bevry.me/crypto",
-      "flattrUsername": "balupton",
-      "liberapayUsername": "bevry",
-      "opencollectiveUsername": "bevry",
-      "patreonUsername": "bevry",
-      "paypalURL": "https://bevry.me/paypal",
-      "wishlistURL": "https://bevry.me/wishlist",
-      "travisTLD": "com"
-    }
-  },
-  "funding": "https://bevry.me/fund",
-  "author": "2013+ Bevry Pty Ltd <us@bevry.me> (http://bevry.me)",
-  "maintainers": [
-    "Benjamin Lupton <b@lupton.cc> (http://balupton.com)"
-  ],
+  "author": "yangdage",
   "contributors": [
     "Benjamin Lupton <b@lupton.cc> (http://balupton.com)",
     "Stephen Brown II <Stephen.Brown2@gmail.com> (https://github.com/StephenBrown2)",
@@ -55,11 +22,11 @@
     "dependabot-preview[bot] (http://github.com/apps/dependabot-preview)"
   ],
   "bugs": {
-    "url": "https://github.com/bevry/getmac/issues"
+    "url": "https://github.com/SHEIN-WMS-FE/getmymac/issues"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/bevry/getmac.git"
+    "url": "https://github.com/SHEIN-WMS-FE/getmymac.git"
   },
   "engines": {
     "node": ">=8"
