@@ -18,8 +18,7 @@ Or
 
         const mac = await getMac();
 
-
-
 ## LICENSE
-
+----
+[MIT](./LICENSE)
 
