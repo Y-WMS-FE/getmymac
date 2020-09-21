@@ -15,9 +15,9 @@ Or
 ## Usage
 ----
 
-        const { getMac } = require('getmymac);
+        const { getMAC } = require('getmymac);
 
-        const mac = await getMac();
+        const mac = await getMAC();
 
 ## LICENSE
 ----
