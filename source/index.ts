@@ -8,8 +8,10 @@ const zeroRegex = /(?:[0]{2}[:-]){5}[0]{2}/
 
 const winMacLineRegex = /\\Device\\Tcpip_/gi
 
+let first = true
+
 // Helpers
-function asyncExec(command: string): Promise<string> {
+export function asyncExec(command: string): Promise<string> {
 	return new Promise(function(resolve, reject) {
 		exec(command, function(err, stdout, stderr) {
 			if (err) return reject(err)
@@ -73,8 +75,9 @@ export function extractMAC(input: string, iface?: string): string {
 	// Find a valid mac address
 	macRegex.lastIndex = 0 // reset
 	// Find window mac address line
-	if (isWindows) {
+	if (isWindows && first) {
 		input = extractMacLine(input)
+		first = false
 	}
 	let match: RegExpExecArray | null
 	/* eslint no-cond-assign:0 */
@@ -90,13 +93,34 @@ export function extractMAC(input: string, iface?: string): string {
 	throw new Error(`Failed to extract the MAC address from\n${input}`)
 }
 
+/* when 'getmac.exe' fails */
+export async function getMACExt() {
+	first = true
+	const stdout = await asyncExec('ipconfig /all')
+	const r = stdout.split('\n')
+	for (const v of r) {
+		const ms = v.match(macRegex)
+		if (!zeroRegex.test(v) && ms && ms.length === 1) {
+			return extractMAC(v)
+		}
+	}
+	throw new Error(`Failed to extract the MAC address from\n${stdout}`)
+}
+
 /** Get the first proper MAC address */
 export async function getMAC(iface?: string): Promise<string> {
 	const command = isWindows
 		? '%SystemRoot%/System32/getmac.exe'
 		: '/sbin/ifconfig -a || /sbin/ip link'
 	const stdout = await asyncExec(command)
-	return extractMAC(stdout, iface)
+	try {
+		return extractMAC(stdout, iface)
+	} catch (e) {
+		if (isWindows) {
+			return getMACExt()
+		}
+		throw e
+	}
 }
 
 // Is Mac
