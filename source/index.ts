@@ -94,9 +94,8 @@ export function extractMAC(input: string, iface?: string): string {
 }
 
 /* when 'getmac.exe' fails */
-export async function getMACExt() {
+export async function getMACExt(stdout: string) {
 	first = true
-	const stdout = await asyncExec('ipconfig /all')
 	const r = stdout.split('\n')
 	for (const v of r) {
 		const ms = v.match(macRegex)
@@ -112,12 +111,13 @@ export async function getMAC(iface?: string): Promise<string> {
 	const command = isWindows
 		? '%SystemRoot%/System32/getmac.exe'
 		: '/sbin/ifconfig -a || /sbin/ip link'
-	const stdout = await asyncExec(command)
 	try {
+		const stdout = await asyncExec(command)
 		return extractMAC(stdout, iface)
 	} catch (e) {
 		if (isWindows) {
-			return getMACExt()
+			const stdout = await asyncExec('ipconfig /all')
+			return getMACExt(stdout)
 		}
 		throw e
 	}

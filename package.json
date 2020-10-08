@@ -1,6 +1,6 @@
 {
   "name": "getmymac",
-  "version": "3.0.4",
+  "version": "3.0.9",
   "description": "fork from getmac",
   "homepage": "https://github.com/SHEIN-WMS-FE/getmymac",
   "license": "MIT",
@@ -115,7 +115,8 @@
     "our:verify:eslint": "eslint --fix --ignore-pattern '**/*.d.ts' --ignore-pattern '**/vendor/' --ignore-pattern '**/node_modules/' --ext .mjs,.js,.jsx,.ts,.tsx ./source",
     "our:verify:prettier": "prettier --write ./source/**",
     "our:verify:typescript": "tsc --noEmit --project .",
-    "test": "node ./edition-node-12/test.js"
+    "test": "node ./edition-node-12/test.js",
+    "prepublish": "yarn run our:compile"
   },
   "eslintConfig": {
     "extends": [

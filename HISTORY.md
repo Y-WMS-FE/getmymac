@@ -1,5 +1,5 @@
 # History
-## v3.0.2 2020 October 8
+## v3.0.10 2020 October 8
 -   修复了windows中getmac.exe失败时的处理
 
 ## v3.0.2 2020 September 15

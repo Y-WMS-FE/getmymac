@@ -19,6 +19,12 @@ Or
 
         const mac = await getMAC();
 
+## Publish
+----
+
+        yarn run our:compile
+        yarn publish
+
 ## LICENSE
 ----
 [MIT](./LICENSE)
